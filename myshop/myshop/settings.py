@@ -180,7 +180,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # SMTP-сервер (для Gmail) "smtp.yandex.ru" (для Yandex)
-EMAIL_PORT = 587  # Порт для TLS
-EMAIL_USE_TLS = True  # Использование TLS
-EMAIL_HOST_USER = 'ваш_email@gmail.com'  # Ваш email
-EMAIL_HOST_PASSWORD = 'ваш_пароль'  # Пароль или app-specific пароль
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ваш_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'ваш_пароль'
