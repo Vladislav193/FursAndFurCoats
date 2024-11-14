@@ -1,7 +1,7 @@
 from rest_framework import viewsets, filters, status
 from rest_framework.response import Response
 from .models import Product, Category
-from .serializers import ProductSerializers, CategorySerializers#, CategoryFilterSerializers
+from .serializers import ProductSerializers, CategorySerializers
 
 
 class ProductViewSet(viewsets.ModelViewSet):

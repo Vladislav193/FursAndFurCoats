@@ -1,0 +1,32 @@
+version: '20.10.22'
+
+services:
+  web:
+    build: .
+    command: ["gunicorn", "myshop.wsgi:application", "--bind", "0.0.0.0:8000"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DEBUG=False
+      - DJANGO_SETTINGS_MODULE=myshop.settings
+      - DATABASE_URL=postgres://user:password@db:5432/mydb
+
+
+  db:
+    image: postgres:13.0-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
