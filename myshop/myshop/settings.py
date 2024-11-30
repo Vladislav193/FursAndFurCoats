@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'Cart.apps.CartConfig',
     'Order.apps.OrderConfig',
     'Category.apps.CategoryConfig',
-    'yookassa.apps.YookassaConfig',
+    'my_yookassa.apps.YookassaConfig',
 ]
 
 
