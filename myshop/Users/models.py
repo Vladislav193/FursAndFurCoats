@@ -27,6 +27,11 @@ class User(AbstractUser):
         verbose_name="Фамилия пользователя",
         max_length=150,
     )
+    telegram_id = models.BigIntegerField(
+        unique=True,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.username

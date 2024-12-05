@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'Order.apps.OrderConfig',
     'Category.apps.CategoryConfig',
     'my_yookassa.apps.YookassaConfig',
+    'service.apps.ServiceConfig',
 ]
 
 
