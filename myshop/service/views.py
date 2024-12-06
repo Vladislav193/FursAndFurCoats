@@ -1,16 +1,20 @@
 import json
+import os
 import secrets
 
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.core.cache import cache
 from Users.models import User
 from django.contrib.auth import login
+from dotenv import load_dotenv
 
+load_dotenv()
 def sercret_token(request):
     unique_token = secrets.token_urlsafe()
     cache.set(unique_token, unique_token, timeout=300)
-    return render(request, 'login.html', {'unique_token':unique_token})
+    bot_user = os.getenv('BOT_USER')
+    url_telegram = f"https://t.me/{bot_user}?start={unique_token}"
+    return JsonResponse({"auth_link": url_telegram}, status=200)
 
 
 def telega_login(request):
@@ -25,8 +29,8 @@ def telega_login(request):
         user, created = User.objects.get_or_created(telega_id=telega_id)
         if created:
             user.username = data.get('telegram_username')
-            user.last_name =  data.get('telegram_last_name')
-            user.first_name = data.get('telegram_first_name')
+            user.last_name = data.get('telegram_last_name')
+            user.first_name = data.get('telegram_username')
             user.email = data.get('telegram_email')
             user.telega_id = telega_id
             user.save

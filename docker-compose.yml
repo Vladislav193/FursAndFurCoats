@@ -2,18 +2,25 @@ version: '20.10.22'
 
 services:
   web:
-    build: .
-    volumes:
-      - .:/app
+    build:
+      context: ./myshop
+      dockerfile: Dockerfile
+    container_name: django_container
     ports:
       - "8000:8000"
     depends_on:
       - db
 
+  bot:
+    build:
+      context: ./telegram_bot
+      dockerfile: Dockerfile
+    depends_on:
+      - web
 
   db:
     image: postgres:13.0-alpine
-    container_name: postgres_db1
+    container_name: postgres_db2
     environment:
       POSTGRES_DB: mydb
       POSTGRES_USER: user
