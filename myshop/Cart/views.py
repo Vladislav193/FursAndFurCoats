@@ -9,8 +9,8 @@ class CartViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def list(self, request):
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        serializer = CartSerializers(cart)
+        cart, created = Cart.objects.filter(user=request.user)
+        serializer = CartSerializers(cart, many=True)
         return Response(serializer.data)
 
     def create(self, request):
