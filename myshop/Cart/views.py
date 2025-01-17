@@ -15,16 +15,15 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         cart, created = Cart.objects.get_or_create(user=request.user)
-        seriliazer = CartItemSerializers(data=request.data)
+        seriliazer = CartItemSerializers(data=request.data, context={'cart':cart})
         if seriliazer.is_valid():
-            CartItem.objects.create(cart=cart, **seriliazer.validated_data)
+            seriliazer.save()
             return Response(seriliazer.data, status=status.HTTP_201_CREATED)
         return Response(seriliazer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None):
-        cart, create = Cart.objects.get_or_create(user=request.user)
         try:
-            item = CartItem.oblects.get(cart=cart, id=pk)
+            item = CartItem.oblects.get(cart__user=request.user, id=pk)
             item.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except CartItem.DoesNotExist:

@@ -12,11 +12,14 @@ class CartItemSerializers(serializers.ModelSerializer):
         fields = ['product_id', 'quantity']
 
     def create(self, validated_data):
-        cart_item = CartItem.objects.create(
-            user=self.context['request'].user,
+        cart_item, created = CartItem.objects.get_or_create(
+            cart=self.context['cart'],
             product=validated_data['product_id'],
             quantity=validated_data['quantity']
         )
+        if not created:
+            cart_item.quantity += validated_data['quantity']
+            cart_item.save()
         return cart_item
 
 
