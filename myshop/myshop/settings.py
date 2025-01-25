@@ -49,11 +49,9 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'Users.apps.UsersConfig',
-    'Cart.apps.CartConfig',
-    'Order.apps.OrderConfig',
-    'Category.apps.CategoryConfig',
     'my_yookassa.apps.YookassaConfig',
     'service.apps.ServiceConfig',
+    'shop.apps.ShopConfig',
 ]
 
 
